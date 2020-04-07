@@ -1,10 +1,10 @@
 {
-    "name": "race4space/phpcrud",
+    "name": "race4space/php-lib-crud",
     "description": "PHP CRUD Library",
     "type": "library",
     "require": {
         "phpmyadmin/sql-parser": "^5.3",
-        "race4space/phplibrary": "^1.0"
+        "race4space/php-lib-library": "^1.0"
     },
     "license": "MIT",
     "autoload": {
