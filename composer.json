@@ -1,0 +1,24 @@
+{
+    "name": "race4space/phpcrud",
+    "description": "PHP CRUD Library",
+    "type": "library",
+    "require": {
+        "phpmyadmin/sql-parser": "^5.3",
+        "race4space/phplibrary": "^1.0"
+    },
+    "license": "MIT",
+    "autoload": {
+      "psr-4": {
+          "phpcrud\\": "src/"
+      }
+    },
+     "config": {
+            "sort-packages": true
+    },
+    "authors": [
+        {
+            "name": "race4space",
+            "email": "race4space@gmail.com"
+        }
+    ]
+}
