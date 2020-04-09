@@ -74,16 +74,16 @@
         },
         {
             "name": "race4space/php-lib-library",
-            "version": "1.3",
+            "version": "1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/race4space/php-lib-library.git",
-                "reference": "fbf2dc23773997a7f4c93fccb910a63e42d645e8"
+                "reference": "b9c2416c514959b70a3f4000f89b87480b8baee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/race4space/php-lib-library/zipball/fbf2dc23773997a7f4c93fccb910a63e42d645e8",
-                "reference": "fbf2dc23773997a7f4c93fccb910a63e42d645e8",
+                "url": "https://api.github.com/repos/race4space/php-lib-library/zipball/b9c2416c514959b70a3f4000f89b87480b8baee2",
+                "reference": "b9c2416c514959b70a3f4000f89b87480b8baee2",
                 "shasum": ""
             },
             "type": "library",
@@ -103,7 +103,7 @@
                 }
             ],
             "description": "A PHP Library",
-            "time": "2020-04-07T21:30:33+00:00"
+            "time": "2020-04-08T18:45:29+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
