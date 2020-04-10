@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "phpmyadmin/sql-parser": "^5.3",
-        "race4space/php-lib-library": "^2.1"
+        "race4space/php-lib-library": "^2.2"
     },
     "license": "MIT",
     "autoload": {

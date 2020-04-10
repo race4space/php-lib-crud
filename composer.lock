@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bf9a48ae230c6646e77d99b868c58de",
+    "content-hash": "eb7ec18cfba64e72b6d981a1e5f607e3",
     "packages": [
         {
             "name": "phpmyadmin/sql-parser",
@@ -74,16 +74,16 @@
         },
         {
             "name": "race4space/php-lib-library",
-            "version": "2.1",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/race4space/php-lib-library.git",
-                "reference": "7fe46594f60d50aef968008ec11fb8102f897f65"
+                "reference": "bac2bc31db018eb4746e11cd65577635fc9b1824"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/race4space/php-lib-library/zipball/7fe46594f60d50aef968008ec11fb8102f897f65",
-                "reference": "7fe46594f60d50aef968008ec11fb8102f897f65",
+                "url": "https://api.github.com/repos/race4space/php-lib-library/zipball/bac2bc31db018eb4746e11cd65577635fc9b1824",
+                "reference": "bac2bc31db018eb4746e11cd65577635fc9b1824",
                 "shasum": ""
             },
             "type": "library",
@@ -103,7 +103,7 @@
                 }
             ],
             "description": "A PHP Library",
-            "time": "2020-04-09T18:42:47+00:00"
+            "time": "2020-04-10T11:50:58+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
