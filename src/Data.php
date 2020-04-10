@@ -435,7 +435,7 @@ class Data {
       $this->stmt=$this->obj_pdo->pdo->prepare($this->str_sql);
     }
     catch(PDOException $e) {
-        fn_write_message("Error", $e->getMessage());
+        $this->fn_write_message("Error", $e->getMessage());
         die();
     }
     //echo $this->obj_pdo->interpolateQuery($this->str_sql, $this->params);
@@ -445,7 +445,7 @@ class Data {
       $this->stmt->execute($this->params);
     }
     catch(PDOException $e) {
-        fn_write_message("Error", $e->getMessage());
+        $this->fn_write_message("Error", $e->getMessage());
         die();
     }
 
