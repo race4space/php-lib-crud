@@ -289,7 +289,7 @@ class Data {
         $this->str_sql=$this->str_data_query;
       }
     }
-    $this->str_sql = $this->fn_remove_newline($this->str_sql);
+    $this->str_sql = $this->fn_replace_newline($this->str_sql);
     if(empty($this->str_sql)){
       $this->fn_write_container("Query is empty...");
       die();
