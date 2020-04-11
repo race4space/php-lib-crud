@@ -289,6 +289,7 @@ class Data {
         $this->str_sql=$this->str_data_query;
       }
     }
+    $this->str_sql = $this->fn_trim($this->str_sql);
     if(empty($this->str_sql)){
       $this->fn_write_container("Query is empty...");
       die();
@@ -298,7 +299,6 @@ class Data {
 
     if($bln_debug_parser){$this->fn_debug_parser();}
 
-    //$this->fn_echo("this->str_sql", $this->str_sql);
     $str_sql=$this->fn_itrim_from($this->str_sql, ";");
     $str_sql=$this->fn_itrim_from($str_sql, " LIMIT ");
     $str_sql=$this->fn_itrim_from($str_sql, " ORDER BY ");
@@ -434,17 +434,17 @@ class Data {
       //$this->fn_echo("final prior prepare sql ", $this->str_sql);
       $this->stmt=$this->obj_pdo->pdo->prepare($this->str_sql);
     }
-    catch(PDOException $e) {
+    catch(\PDOException $e) {
         $this->fn_write_message("Error", $e->getMessage());
         die();
     }
     //echo $this->obj_pdo->interpolateQuery($this->str_sql, $this->params);
-    if($this->bln_debug){fn_write_array($this->params);}
+    if($this->bln_debug){$this->fn_write_array($this->params);}
 
     try{
       $this->stmt->execute($this->params);
     }
-    catch(PDOException $e) {
+    catch(\PDOException $e) {
         $this->fn_write_message("Error", $e->getMessage());
         die();
     }
@@ -1192,7 +1192,13 @@ class Data {
     $obj_parser = new Parser($str_sql);
     //fn_print($obj_parser);
     //fn_print_json($obj_parser);
+    if (isset($obj_parser->statements[0])){
     $obj_parser_stmt=$obj_parser->statements[0];
+    }
+    else {
+      $this->fn_write_container("You have an error with your SQL Syntax.");
+      die();
+    }
     //fn_print_json($obj_parser_stmt);
     //$this->fn_echo("<br>");
     $this->obj_parser_stmt=$obj_parser_stmt;
@@ -1326,7 +1332,7 @@ class Data {
       $obj_parser_stmt=$this->obj_parser_stmt;
     }
 
-    fn_print_json($obj_parser_stmt);
+    $this->fn_print_json($obj_parser_stmt);
     $this->fn_echo("<br>");
 
     $this->fn_echo("obj_parser_stmt str_sql", "[".$obj_parser_stmt->str_sql."]");
@@ -1334,7 +1340,7 @@ class Data {
     $this->fn_echo("obj_parser_stmt->str_options", "[".$obj_parser_stmt->str_options."]");
     $this->fn_echo("obj_parser_stmt->str_expr", "[".$obj_parser_stmt->str_expr."]");
     if(isset($obj_parser_stmt->expr)){
-    fn_print($arr_expr=$obj_parser_stmt->expr);
+    $this->fn_print($arr_expr=$obj_parser_stmt->expr);
     }
     $this->fn_echo("obj_parser_stmt->str_from", "[".$obj_parser_stmt->str_from."]");
     $this->fn_echo("obj_parser_stmt->str_data_schema", $obj_parser_stmt->str_data_schema);
