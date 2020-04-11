@@ -290,7 +290,7 @@ class Data {
       }
     }
     if(empty($this->str_sql)){
-      fn_write_container("Query is empty...");
+      $this->fn_write_container("Query is empty...");
       die();
     }
     $this->fn_define_query();
