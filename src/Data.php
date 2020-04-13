@@ -1,6 +1,7 @@
 <?php
 namespace phpcrud;
 $obj_auth=new \phplibrary\Auth();
+
 $obj_auth->fn_check_ajax();
 
 use PhpMyAdmin\SqlParser\{Parser,Context};
@@ -34,19 +35,11 @@ class Data {
     //define any values of variables without issue here.
     $this->fn_initialize_id();
 
-    $int_row_start=0;
-    if (isset($_SESSION["int_row_start"])){
-        $int_row_start=$_SESSION["int_row_start"];
-    }
-    $this->int_row_start=$int_row_start;
+    $this->fn_load_session_navigation();
 
-    $int_row_count=0;
-    if (isset($_SESSION["int_row_count"])){
-        $int_row_count=$_SESSION["int_row_count"];
-    }
-    $this->int_row_count=$int_row_count;
 
     $this->int_num_row_per_page_default="5";
+    $this->bln_display_record_console=true;
     $this->bln_disable_nav_start=false;
     $this->bln_disable_nav_end=false;
     $this->str_data_message="";
@@ -172,6 +165,8 @@ class Data {
   function fn_initialize_form() { //get any form variables that ahve been sent up
     if($this->bln_debug){$this->fn_echo("fn_initialize_form");}
 
+    $this->str_search_expr="";
+
     $this->arr_form=[];
     parse_str ($this->str_formvar, $this->arr_form);
     if($this->bln_debug){$this->fn_dump($this->arr_form);}
@@ -185,6 +180,17 @@ class Data {
       }
       $this->str_search=$str_val;
     }
+    if (!isset($_SESSION["str_search"])){
+      $_SESSION["str_search"]="";
+    }
+    /*
+    $this->fn_echo("SESSION[str_search]", $_SESSION["str_search"]);
+    $this->fn_echo("this->str_search", $this->str_search);
+    //*/
+    if ($_SESSION["str_search"]!==$this->str_search){
+      $this->fn_reset_navigation();
+    }
+    $_SESSION["str_search"]=$this->str_search;
   }
 
   function fn_execute(){
@@ -266,14 +272,30 @@ class Data {
     if($this->bln_debug){$this->fn_echo("fn_initialize_navigation");}
     $this->bln_edit=false;
   }
+  function fn_load_session_navigation(){
+    if($this->bln_debug){$this->fn_echo("fn_load_session_navigation");}
+    $int_row_start=0;
+    if (isset($_SESSION["int_row_start"])){
+        $int_row_start=$_SESSION["int_row_start"];
+    }
+    $this->int_row_start=$int_row_start;
+
+    $int_row_count=0;
+    if (isset($_SESSION["int_row_count"])){
+        $int_row_count=$_SESSION["int_row_count"];
+    }
+    $this->int_row_count=$int_row_count;
+  }
   function fn_reset_navigation(){
-    if($this->bln_debug){$this->fn_echo("fn_initialize_navigation");}
+    if($this->bln_debug){$this->fn_echo("fn_reset_navigation");}
+    //$this->fn_echo("fn_reset_navigation");
     //e.g after a record is deleted.
-    //e.g after a record is isnerted.
+    //e.g after a record is inserted.
     $this->fn_initialize_id();
     $this->fn_initialize_navigation();
-    $this->int_row_start=0;
-    $this->int_row_count=0;
+    $_SESSION["int_row_start"]=0;
+    $_SESSION["int_row_count"]=0;
+    $this->fn_load_session_navigation();
   }
   function fn_debug_navigation($str_message=""){
     if(!empty($str_message)){$this->fn_echo($str_message);}
@@ -361,7 +383,7 @@ class Data {
     $s="";
     if(!empty($this->str_search)){
       $this->fn_compile_search();
-      $s.=$this->fn_add_and($s, $this->str_search);
+      $s.=$this->fn_add_and($s, $this->str_search_expr);
     }
     if(!empty($this->int_id_record)){//add where id
       $this->fn_compile_where_id();
@@ -412,6 +434,8 @@ class Data {
   }
   function fn_compile_search(){
 
+    $this->str_search_expr="";
+
     if(!empty($this->str_search)){
       $arr_expr=$this->obj_parser_stmt->expr;
       $str_expr=implode($arr_expr);
@@ -436,7 +460,7 @@ class Data {
       $s = rtrim($s, " OR ");
       $s.=") ";
     }
-    $this->str_search=$s;
+    $this->str_search_expr=$s;
   }
 
   function fn_open_rs(){
