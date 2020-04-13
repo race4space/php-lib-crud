@@ -188,7 +188,7 @@ class Data {
     $this->fn_echo("this->str_search", $this->str_search);
     //*/
     if ($_SESSION["str_search"]!==$this->str_search){
-      $this->fn_reset_navigation();
+      $this->fn_reset_session_navigation();
     }
     $_SESSION["str_search"]=$this->str_search;
   }
@@ -293,6 +293,9 @@ class Data {
     //e.g after a record is inserted.
     $this->fn_initialize_id();
     $this->fn_initialize_navigation();
+    $this->fn_reset_session_navigation();
+  }
+  function fn_reset_session_navigation(){
     $_SESSION["int_row_start"]=0;
     $_SESSION["int_row_count"]=0;
     $this->fn_load_session_navigation();
@@ -1292,10 +1295,16 @@ class Data {
         $bln_write=false;
       }
       if($str_key==="PRI"){
-        $bln_write=false;
+        $bln_write=false;//By Default, Hide IDs from forms ? The false setting seems to have no affect
         if($this->bln_ignore_key_filter){
-          if(!empty($foo_value) || $foo_value==="0"){// can write ids or zero
+          if(!empty($foo_value) || $foo_value==="0"){// restrict to  write ids or zero
             $bln_write=true;
+          }
+          //N.B.The Restricion Avoids Duplicate Ids being created via Copy or Update
+          //However the restriciton does prevent searching on Record Ids.
+          //Below is attempt to allow $bln_write=true when the aciton is view record/s/ /search
+          if($this->str_action=="records-view" or $this->str_action=="record-view"){
+              $bln_write=true;
           }
         }
       }
