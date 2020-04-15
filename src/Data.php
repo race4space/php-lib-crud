@@ -62,6 +62,7 @@ class Data {
   function fn_ini_action_children($bln_val){
     $this->str_id_record_parent="cid";
     $this->str_id_record_child="id";
+    $this->str_order_by_child="tab";
 
     $this->bln_record_copy_children=$bln_val;
     $this->bln_record_view_children=$bln_val;
@@ -809,7 +810,7 @@ class Data {
     $str_data_schema=$this->obj_parser_stmt->str_data_schema;
     $str_data_table=$this->obj_parser_stmt->str_data_table;
     $this->bln_display_record_console=false;
-    $this->str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent;";
+    $this->str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent ORDER BY `$this->str_order_by_child`;";
     $this->str_action="records-view";
     $this->fn_action_rs();
   }
@@ -818,7 +819,7 @@ class Data {
 
     $str_data_schema=$this->obj_parser_stmt->str_data_schema;
     $str_data_table=$this->obj_parser_stmt->str_data_table;
-    $str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent;";
+    $str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent ORDER BY `$this->str_order_by_child`;";
     $stmt=$this->obj_pdo->pdo->query($str_sql);
     while($row=$stmt->fetch(\PDO::FETCH_ASSOC)){
       $this->int_id_record=$row["$this->str_id_record_child"];
@@ -947,7 +948,7 @@ class Data {
 
     $str_data_schema=$this->obj_parser_stmt->str_data_schema;
     $str_data_table=$this->obj_parser_stmt->str_data_table;
-    $str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent;";
+    $str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent ORDER BY `$this->str_order_by_child`;";
     $stmt=$this->obj_pdo->pdo->query($str_sql);
     while($row=$stmt->fetch(\PDO::FETCH_ASSOC)){
 
@@ -1021,7 +1022,7 @@ class Data {
     }
     $str_data_schema=$this->obj_parser_stmt->str_data_schema;
     $str_data_table=$this->obj_parser_stmt->str_data_table;
-    $this->str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent;";
+    $this->str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent ORDER BY `$this->str_order_by_child`;";
     $this->fn_action_record_delete();
   }
 
@@ -1034,7 +1035,7 @@ class Data {
     }
     $str_data_schema=$this->obj_parser_stmt->str_data_schema;
     $str_data_table=$this->obj_parser_stmt->str_data_table;
-    $str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent;";
+    $str_sql="SELECT * FROM `".$str_data_schema."`.`".$str_data_table."` WHERE `$this->str_id_record_parent`=$int_id_record_parent ORDER BY `$this->str_order_by_child`;";
     $stmt=$this->obj_pdo->pdo->query($str_sql);
     while($row=$stmt->fetch(\PDO::FETCH_ASSOC)){
       $this->int_id_record=$row["$this->str_id_record_child"];
